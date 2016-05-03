@@ -42,7 +42,6 @@ function obrabotka_load_future_events() {
                 }
                 $post_excerpt = strip_tags(substr($event->description, 0, $end)) . '... ';
                  
-                //$fee = (is_null($event->fee->amount)) ? 0 : 
                 
                 $my_post = array(
     			  'post_title'    => $event->name,
@@ -64,13 +63,13 @@ function obrabotka_load_future_events() {
     			
     			$post_id = wp_insert_post( $my_post);
     			wp_set_object_terms($post_id,'upcoming-events','product_cat');
-    			//удалить нулевые цены
+   
     			if (! isset($event->fee->amount)) {
     			    delete_post_meta($post_id,'_regular_price');
     			    delete_post_meta($post_id,'_price');
     			}
     			
-    			//загрузить первую картинку
+  
     			preg_match('/(?<=<img src=")[^"]+/',$event->description,$image_links);
     			
     			add_action('add_attachment','obrabotka_save_attachment_id');
