@@ -45,6 +45,7 @@ function mtw_process_response_page($response) {
 				if ( $post_event[$event->id]->status == $upcoming_product_cat ) {
 					if ( $event->status == 'past' ) {
 						$post_id = $post_event[$event->id]->post_id;
+						wp_set_object_terms($post_id,'past-events','product_cat');
 						//echo 'updated '.$post_id .'<br>';
 						update_post_meta($post_id ,'_stock_status','outofstock');
 						delete_post_meta($post_id ,'_price');
